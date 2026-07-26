@@ -1,4 +1,4 @@
-# coreboot en una HP Pavilion dm4-3000 (placa 1793)
+# coreboot en una HP Pavilion dm4-3099se (placa 1793)
 
 Bueno, esto es un port de coreboot para mi notebook vieja que ya no tiene mas soporte de nadie,siempre intui que se podia instalar, ya que no habia nadie que lo instalo en esta notebook, ademas esta  el
 exploit que hice para poder flashearla sin abrir la máquina(me daba paja, a pesar de que la desarme 1 millon de veces).
