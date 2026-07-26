@@ -461,7 +461,7 @@ Device (EC0)
 	    })
 	    Method (_STA, 0, NotSerialized)  // _STA: Status
 	    {
-	        If ((B0ST == 0xFF))
+	        If (One)   /* siempre releer: sin esto el valor queda cacheado */
 	        {
 	            If (ECON)
 	            {
@@ -551,7 +551,7 @@ Device (EC0)
 	    Name (_HID, "ACPI0003" /* Power Source Device */)  // _HID: Hardware ID
 	    Method (_PSR, 0, NotSerialized)  // _PSR: Power Source
 	    {
-	        If ((ACST == 0xFF))
+	        If (One)   /* siempre releer: sin esto el valor queda cacheado */
 	        {
 	            If (ECON)
 	            {
@@ -604,4 +604,66 @@ Device (EC0)
 	        Return (0x0F)
 	    }
 }
+
+	/*
+	 * Eventos SCI del EC (GPE 0x17). Sin estos, ACPI nunca se entera de que
+	 * cambio el estado de la corriente o la bateria.
+	 * Portados del DSDT original; se omitieron las llamadas a metodos del
+	 * firmware de HP que no existen aca (PSKY, ACCL.ADAL, HDWN, PWRS).
+	 */
+	Method (_Q40, 0, NotSerialized)   /* cambio de informacion de bateria */
+	{
+	    B0ST = 0xFF
+	    Notify (BAT0, 0x81)
+	}
+
+	Method (_Q41, 0, NotSerialized)
+	{
+	    B0ST = 0xFF
+	    Notify (BAT0, 0x81)
+	}
+
+	Method (_Q48, 0, NotSerialized)   /* cambio de estado de bateria */
+	{
+	    Notify (BAT0, 0x80)
+	}
+
+	Method (_Q4C, 0, NotSerialized)
+	{
+	    If (B0ST)
+	    {
+	        Notify (BAT0, 0x80)
+	    }
+	}
+
+	Method (_Q50, 0, NotSerialized)   /* AC enchufado */
+	{
+	    ACST = 0xFF
+	    B0ST = 0xFF
+	    Notify (ADP1, 0x80)
+	    Notify (BAT0, 0x80)
+	    PNOT ()
+	}
+
+	Method (_Q51, 0, NotSerialized)   /* AC desenchufado */
+	{
+	    ACST = 0xFF
+	    B0ST = 0xFF
+	    Notify (ADP1, 0x80)
+	    Notify (BAT0, 0x80)
+	    PNOT ()
+	}
+
+	Method (_Q52, 0, NotSerialized)   /* tapa */
+	{
+	    LIDS = KLID
+	    Notify (LID0, 0x80)
+	}
+
+	Method (_Q53, 0, NotSerialized)
+	{
+	    LIDS = KLID
+	    Notify (LID0, 0x80)
+	}
+
 }
