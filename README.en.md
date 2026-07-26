@@ -65,9 +65,9 @@ should the RAM it's got, but that's a whole other story lol)
 ```bash
 git clone https://review.coreboot.org/coreboot.git
 cd coreboot
-cp -r /path/to/this/repo/src/mainboard/hewlett_packard/* src/mainboard/hewlett_packard/
+cp -r /path/to/this/repo/src/mainboard/hp/pavilion_dm4 src/mainboard/hp/
 make crossgcc-i386 CPUS=$(nproc)
-make menuconfig     # Mainboard -> Hewlett-Packard -> HP Pavilion dm4 Notebook PC
+make menuconfig     # Mainboard -> HP -> Pavilion dm4-3000 series
 make
 ```
 

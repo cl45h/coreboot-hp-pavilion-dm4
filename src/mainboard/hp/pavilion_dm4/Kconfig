@@ -1,7 +1,7 @@
 ## SPDX-License-Identifier: GPL-2.0-only
 # By cl45h, Aguante RemoteExecution, siempre <3
 
-if BOARD_HEWLETT_PACKARD_HP_PAVILION_DM4_NOTEBOOK_PC
+if BOARD_HP_PAVILION_DM4
 
 config BOARD_SPECIFIC_OPTIONS
 	def_bool y
@@ -13,7 +13,7 @@ config BOARD_SPECIFIC_OPTIONS
 	select HAVE_ACPI_RESUME
 	select HAVE_ACPI_TABLES
 	select INTEL_INT15
-	select MAINBOARD_HAS_LIBGFXINIT # FIXME: check this
+	select MAINBOARD_HAS_LIBGFXINIT
 	select NORTHBRIDGE_INTEL_SANDYBRIDGE
 	select SERIRQ_CONTINUOUS_MODE
 	select SOUTHBRIDGE_INTEL_BD82X6X
@@ -22,21 +22,25 @@ config BOARD_SPECIFIC_OPTIONS
 
 config MAINBOARD_DIR
 	string
-	default "hewlett_packard/hp_pavilion_dm4_notebook_pc"
+	default "hp/pavilion_dm4"
 
 config MAINBOARD_PART_NUMBER
 	string
-	default "HP Pavilion dm4 Notebook PC"
+	default "Pavilion dm4-3000 series"
 
 config VGA_BIOS_ID
 	string
 	default "8086,0116"
 
-config DRAM_RESET_GATE_GPIO # FIXME: check this
+# Verificado contra el gpio.c leido del hardware: el firmware original
+# configura GPIO60 como GPIO_MODE_GPIO + GPIO_DIR_OUTPUT, que es lo que
+# southbridge_gate_memory_reset() necesita.
+config DRAM_RESET_GATE_GPIO
 	int
 	default 60
 
-config USBDEBUG_HCD_INDEX # FIXME: check this
+# El indice 2 mapea a 00:1a.0 (EHCI #2), que existe en esta placa.
+config USBDEBUG_HCD_INDEX
 	int
 	default 2
 endif

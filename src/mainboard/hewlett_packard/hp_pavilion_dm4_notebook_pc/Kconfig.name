@@ -1,5 +1,0 @@
-## SPDX-License-Identifier: GPL-2.0-only
-# By cl45h, Aguante RemoteExecution, siempre <3
-
-config BOARD_HEWLETT_PACKARD_HP_PAVILION_DM4_NOTEBOOK_PC
-	bool "HP Pavilion dm4 Notebook PC"

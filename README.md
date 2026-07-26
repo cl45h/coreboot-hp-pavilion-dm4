@@ -59,9 +59,9 @@ Probado en **mi** dm4-3099se. A mí me funcionó, ojo con eso.
 ```bash
 git clone https://review.coreboot.org/coreboot.git
 cd coreboot
-cp -r /ruta/a/este/repo/src/mainboard/hewlett_packard/* src/mainboard/hewlett_packard/
+cp -r /ruta/a/este/repo/src/mainboard/hp/pavilion_dm4 src/mainboard/hp/
 make crossgcc-i386 CPUS=$(nproc)
-make menuconfig     # Mainboard -> Hewlett-Packard -> HP Pavilion dm4 Notebook PC
+make menuconfig     # Mainboard -> HP -> Pavilion dm4-3000 series
 make
 ```
 
