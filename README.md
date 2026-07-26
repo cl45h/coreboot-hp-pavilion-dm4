@@ -1,9 +1,10 @@
 # coreboot en una HP Pavilion dm4-3000 (placa 1793)
 
-Bueno, esto es un port de coreboot para una notebook que no estaba soportada por nadie, más el
-exploit que hice para poder flashearla sin abrir la máquina ni comprar un programador.
+Bueno, esto es un port de coreboot para mi notebook vieja que ya no tiene mas soporte de nadie,siempre intui que se podia instalar, ya que no habia nadie que lo instalo en esta notebook, ademas esta  el
+exploit que hice para poder flashearla sin abrir la máquina(me daba paja, a pesar de que la desarme 1 millon de veces).
 
-Arrancó como "che, ¿se le podrá poner libreboot a esta notebook vieja?" y terminó en esto.
+Hace tiempo que  queria instalarlo, y a veces hacia algun research, pero siempre la quedaba,entonces me propuse, voy a tratar de flashear lo mas que se pueda, y si se brickea, buen tocara usar la pinza xD
+tambien me pregunte se le podrá poner libreboot a esta notebook vieja?" y terminó en esto.
 
 > **English summary:** coreboot mainboard port for the HP Pavilion dm4-3000 series
 > (board ID 1793, Sandy Bridge / HM67). Includes an S3 boot script exploit that unlocks the
