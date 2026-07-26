@@ -1,0 +1,5 @@
+## SPDX-License-Identifier: GPL-2.0-only
+## By cl45h, Aguante RemoteExecution, siempre <3
+
+config VENDOR_HEWLETT_PACKARD
+	bool "Hewlett-Packard"

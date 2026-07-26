@@ -1,0 +1,42 @@
+## SPDX-License-Identifier: GPL-2.0-only
+# By cl45h, Aguante RemoteExecution, siempre <3
+
+if BOARD_HEWLETT_PACKARD_HP_PAVILION_DM4_NOTEBOOK_PC
+
+config BOARD_SPECIFIC_OPTIONS
+	def_bool y
+	select AZALIA_USE_LEGACY_VERB_TABLE
+	select BOARD_ROMSIZE_KB_4096
+	select EC_ACPI
+	select GFX_GMA_PANEL_1_ON_LVDS
+	select INTEL_GMA_HAVE_VBT
+	select HAVE_ACPI_RESUME
+	select HAVE_ACPI_TABLES
+	select INTEL_INT15
+	select MAINBOARD_HAS_LIBGFXINIT # FIXME: check this
+	select NORTHBRIDGE_INTEL_SANDYBRIDGE
+	select SERIRQ_CONTINUOUS_MODE
+	select SOUTHBRIDGE_INTEL_BD82X6X
+	select SYSTEM_TYPE_LAPTOP
+	select USE_NATIVE_RAMINIT
+
+config MAINBOARD_DIR
+	string
+	default "hewlett_packard/hp_pavilion_dm4_notebook_pc"
+
+config MAINBOARD_PART_NUMBER
+	string
+	default "HP Pavilion dm4 Notebook PC"
+
+config VGA_BIOS_ID
+	string
+	default "8086,0116"
+
+config DRAM_RESET_GATE_GPIO # FIXME: check this
+	int
+	default 60
+
+config USBDEBUG_HCD_INDEX # FIXME: check this
+	int
+	default 2
+endif
