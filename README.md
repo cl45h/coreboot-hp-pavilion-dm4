@@ -8,6 +8,7 @@ exploit que hice para poder flashearla sin abrir la máquina(me daba paja, a pes
 Hace tiempo que  queria instalarlo, y a veces hacia algun research, pero siempre la quedaba,entonces me propuse, voy a tratar de flashear lo mas que se pueda, y si se brickea, buen tocara usar la pinza xD
 tambien me pregunte se le podrá poner libreboot a esta notebook vieja?" y terminó en esto.
 
+<img width="1600" height="900" alt="Screenshot_2026-07-26_03-43-49" src="https://github.com/user-attachments/assets/9132d89c-1651-45df-94da-192cb136ae81" />
 
 ---
 
