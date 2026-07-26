@@ -45,7 +45,7 @@ Probado en **mi** dm4-3099se. A mí me funcionó, ojo con eso.
 | Suspend a S3 | ⚠️ no lo probé con coreboot todavía |
 | Intel ME | ⚠️ sigue vivo, más abajo te cuento |
 
-## El fierro
+## Specs de la note(conste es un frankestein, ese procesador, no deberia estar soportado, y las rams que tiene tampoco, pero esa.. es otra historia xD)
 
 | | |
 |:---|:---|
