@@ -192,7 +192,7 @@ Un detalle que importa: el exploit **no pisa** la rutina que está en `0xACEBC26
 24 veces y si la rompés se te va todo el resume al carajo. Solo reapunto **una** entrada, y mi
 stub salta a la original cuando termina.
 
-## ¿Esto es nuevo? No
+## ¿Esto es nuevo? Na
 
 Para no vender humo: la clase de bug es de 2015, y en su momento hubo advisories de CERT/CC y
 de varios fabricantes. Lo que tengo acá es un caso puntual, medido y sin parchear, con PoC que
@@ -201,9 +201,9 @@ anda. Nada más que eso.
 Para CVE las chances son bajas. El producto está muerto hace años, la clase ya está
 documentada, y encima arrancás desde ring 0.
 
-Lo que sí puede ser jugoso es ver si el mismo patrón está en toda la familia de HP de consumo
+Lo que sí puede ser juicy es ver si el mismo patrón está en toda la familia de HP de consumo
 con InsydeH2O de esa época. Ahí ya no sería "una notebook vieja", sería un bug de plataforma
-que se comió un montón de equipos. Pero eso no lo verifiqué, tengo una sola máquina xD
+que se comió un montón de equipos. Pero eso no lo verifiqué, tengo una sola máquina xD o no :P?
 
 ---
 
