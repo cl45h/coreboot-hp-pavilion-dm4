@@ -295,12 +295,12 @@ costaron:
 
 ## Ojo
 
-Tocar el firmware te puede dejar la máquina para el tacho. Esto está probado en **mi** máquina
+Tocar el firmware te puede dejar la máquina de pisapapeles,  no me hago cargo si se rompe tu fucking machine. Esto está probado en **mi** máquina
 y a mí me anduvo, pero yo tengo *esta* dm4-3099se. Si la tuya es otra variante de la
 dm4-3000, fijate por lo menos el mapa de SPD y los tiempos del panel antes de flashear, que
 están los dos documentados en el writeup.
 
-Y tené un clip SOIC-8 a mano. No para flashear, sino para poder mandarte una cagada tranquilo.
+Y tené un clip SOIC-8 a mano. No para flashear, sino para poder tratar de recuperarla si la cagaste tranquilo xD.
 
 ## Licencia
 
