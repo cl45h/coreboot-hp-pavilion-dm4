@@ -74,7 +74,7 @@ porque si algo explota son la única forma de enterarte de dónde.
 
 # El exploit
 
-Esta es la parte divertida, así que va explicada acá y no solo en el writeup.
+Esta es la parte más copada, así que la explico acá y no te mando solo al writeup.
 
 ## El problema
 
@@ -82,7 +82,7 @@ El firmware de HP protege el **boot block** del flash con el registro `PR0` del 
 SPI. Concretamente el rango `0x3a1000-0x3fffff`, que resulta ser **exactamente** donde vive
 el reset vector (`0xFFFFFFF0` mapea al offset `0x3ffff0` del chip).
 
-O sea: justo el lugar donde coreboot necesita meter su bootblock. Casualidad, ninguna.
+O sea: justo donde coreboot necesita meter su bootblock. Mirá vos qué casualidad.
 
 ```
 BIOS_CNTL (LPC 0xDC) = 0x00     BIOSWE=0  BLE=0  SMM_BWP=0
@@ -93,7 +93,7 @@ PR0       (+0x74)    = 0x83ff03a1  -> protege 0x3a1000-0x3fffff
 Podés escribir el 85% de la región BIOS, pero no la parte que sirve. Sin saltar eso, o
 comprás un programador SPI y abrís la máquina, o no hay coreboot.
 
-Dato lindo: el propio flasher de HP trae `[ForceFlash] BB_PEI=0` en su `platform.ini`. O sea
+Y mirá esto: el flasher de HP trae `[ForceFlash] BB_PEI=0` en su propio `platform.ini`. O sea
 que **su actualizador tampoco toca el boot block**. No es que no quiera, no puede.
 
 ## Lo que NO funcionó
@@ -153,7 +153,7 @@ Ahora, limpiar `PR0` desde ahí no sirve para nada, porque el firmware lo reescr
 Pero `FLOCKDN` es un bit de **una sola escritura**: una vez que lo ponés en 1, los registros
 `PR` quedan congelados hasta el próximo reset, **no importa quién intente escribirlos después**.
 
-Y ahí está la gracia: **le cierro el candado antes que él, con los registros vacíos.**
+Entonces qué hago: **le cierro el candado yo primero, con los registros todavía vacíos.**
 
 ```asm
     push eax
@@ -191,16 +191,18 @@ Un detalle que importa: el exploit **no pisa** la rutina que está en `0xACEBC26
 24 veces y si la rompés se te va todo el resume al carajo. Solo reapunto **una** entrada, y mi
 stub salta a la original cuando termina.
 
-## Sobre si esto es novedoso
+## ¿Esto es nuevo? No
 
-No, y prefiero decirlo. La clase de bug es de 2015 y en su momento generó advisories de
-CERT/CC y varios fabricantes. Lo que hay acá es una instancia concreta, medida y sin parchear
-en un modelo específico, con PoC que anda. Para CVE las chances son bajas: producto fuera de
-soporte, clase conocida, y arrancás desde ring 0.
+Para no vender humo: la clase de bug es de 2015, y en su momento hubo advisories de CERT/CC y
+de varios fabricantes. Lo que tengo acá es un caso puntual, medido y sin parchear, con PoC que
+anda. Nada más que eso.
 
-Lo que sí podría tener recorrido es confirmar que el mismo patrón está en toda la familia de
-HP de consumo con InsydeH2O de esa época. Ahí deja de ser "una notebook vieja" y pasa a ser un
-bug de plataforma. Pero eso yo no lo verifiqué, solo tengo la mía.
+Para CVE las chances son bajas. El producto está muerto hace años, la clase ya está
+documentada, y encima arrancás desde ring 0.
+
+Lo que sí puede ser jugoso es ver si el mismo patrón está en toda la familia de HP de consumo
+con InsydeH2O de esa época. Ahí ya no sería "una notebook vieja", sería un bug de plataforma
+que se comió un montón de equipos. Pero eso no lo verifiqué, tengo una sola máquina xD
 
 ---
 
@@ -232,7 +234,7 @@ Y ahora la buena: **una vez que coreboot arranca, el exploit no lo necesitás nu
 coreboot usa `BOOTMEDIA_LOCK_NONE` y no programa los registros PR, o sea que el flash queda
 abierto para siempre. Reflashear pasa a ser un comando y chau.
 
-### Backup, no seas ansioso
+### Hacete un backup antes, no seas ansioso
 
 ```bash
 sudo flashrom -p internal:laptop=force_I_want_a_brick \
@@ -271,7 +273,7 @@ necesitás nunca más.
 En `docs/` están los dos, y si vas a portar otra placa te conviene leerlos.
 
 **`WRITEUP_completo_coreboot_dm4.md`** cuenta todo el proceso: el reconocimiento, el SoftPaq
-cifrado que no llevó a ningún lado (entropía 7.9995, barrí 8 binarios × 9 cifrados y nada), el
+cifrado que no fue a ningún lado (entropía 7.9995, barrí 8 binarios × 9 cifrados y nada), el
 mapa del flash, cómo salió el exploit, el port con las seis correcciones que hubo que hacer a
 mano, y los tres intentos de flasheo hasta que entró.
 
