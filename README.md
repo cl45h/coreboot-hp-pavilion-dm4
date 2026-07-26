@@ -75,7 +75,7 @@ porque si algo explota son la única forma de enterarte de dónde.
 
 # El exploit
 
-Esta es la parte más copada, así que la explico acá y no te mando solo al writeup.
+Te lo cuento entero acá. El writeup es para el detalle fino.
 
 ## El problema
 
@@ -188,7 +188,7 @@ después del resume: HSFS = 0xe008   PR0 = 0x00000000
 Y flashrom lo confirmó solo: desapareció el `PR0: Warning ... read-only` y la región BIOS
 entera pasó a figurar como `read-write`. **Boot block liberado, sin tocar un tornillo.**
 
-Un detalle que importa: el exploit **no pisa** la rutina que está en `0xACEBC260`. La llaman
+Ojo con esto: el exploit **no pisa** la rutina que está en `0xACEBC260`. La llaman
 24 veces y si la rompés se te va todo el resume al carajo. Solo reapunto **una** entrada, y mi
 stub salta a la original cuando termina.
 
@@ -273,16 +273,15 @@ necesitás nunca más.
 
 En `docs/` están los dos, y si vas a portar otra placa te conviene leerlos.
 
-**`WRITEUP_completo_coreboot_dm4.md`** cuenta todo el proceso: el reconocimiento, el SoftPaq
+**[`WRITEUP_completo_coreboot_dm4.md`](docs/WRITEUP_completo_coreboot_dm4.md)** cuenta todo el proceso: el reconocimiento, el SoftPaq
 cifrado que no fue a ningún lado (entropía 7.9995, barrí 8 binarios × 9 cifrados y nada), el
 mapa del flash, cómo salió el exploit, el port con las seis correcciones que hubo que hacer a
 mano, y los tres intentos de flasheo hasta que entró.
 
-**`WRITEUP_s3_bootscript_pr0_bypass.md`** es el exploit en detalle, con el shellcode comentado,
+**[`WRITEUP_s3_bootscript_pr0_bypass.md`](docs/WRITEUP_s3_bootscript_pr0_bypass.md)** es el exploit en detalle, con el shellcode comentado,
 la evidencia y las mitigaciones.
 
-Ahí están las cosas que ninguna herramienta te va a decir. Dos ejemplos de los que más me
-costaron:
+Ahí está lo que ninguna herramienta te dice. Dos que me hicieron renegar:
 
 - `autoport` te deja el panel configurado como **eDP** cuando el de esta máquina es **LVDS**.
   Con eso la pantalla no enciende y no tenés idea de por qué. Falta un
