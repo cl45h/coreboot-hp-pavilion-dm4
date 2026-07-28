@@ -12,7 +12,7 @@ partes donde me equivoqué, que son las que más sirven.
 La pregunta era simple: *¿se le puede meter libreboot o coreboot a esta notebook vieja?* Una
 dm4 de 2011 con Slackware y dual boot con Windows, que hace rato quería tocar.
 
-La primera respuesta que encontré fue un baldazo. En HP, coreboot solo soporta la línea business
+La primera respuesta que encontré fue un baldazo de agua fria. En HP, coreboot solo soporta la línea business
 (EliteBook, ProBook), porque cada placa hay que portearla a mano. Los Pavilion de consumo no
 están. El único Pavilion en todo el árbol de coreboot es un m6-1035dx, que encima es AMD.
 
