@@ -2,11 +2,11 @@
 
 *[English version](README.en.md)*
 
-Bueno, esto es un port de coreboot para mi notebook vieja que ya no tiene mas soporte de nadie,siempre intui que se podia instalar(ya que el hardware era parecido a otros ports), pero no habia nadie que lo instalo en esta notebook, ademas esta  el
+Bueno, esto es un port de coreboot para mi notebook vieja que ya no tiene mas soporte, siempre intui que se podia instalar(ya que el hardware era parecido a otros ports), pero no habia nadie que lo instalo en esta notebook, ademas esta  el
 exploit que hice para poder flashearla sin abrir la máquina(me daba paja, a pesar de que la desarme 1 millon de veces).
 
 Hace tiempo que  queria instalarlo, y a veces hacia algun research, pero siempre la quedaba,entonces me propuse, voy a tratar de flashear lo mas que se pueda, y si se brickea, buen tocara usar la pinza xD
-tambien me pregunte se le podrá poner libreboot a esta notebook vieja?" y terminó en esto.
+tambien me pregunte: se le podrá poner libreboot a esta notebook vieja?" y terminó en esto.
 
 <img width="1600" height="900" alt="Screenshot_2026-07-26_03-43-49" src="https://github.com/user-attachments/assets/9132d89c-1651-45df-94da-192cb136ae81" />
 
@@ -17,10 +17,10 @@ tambien me pregunte se le podrá poner libreboot a esta notebook vieja?" y termi
 Antes de que preguntes: **no se "portea a libreboot"**. Libreboot no es un firmware, es una
 distribución de coreboot. Agarra coreboot, lo configura, le mete un payload y publica ROMs
 listas para una lista cortita de placas. Vos porteás a **coreboot**, y libreboot después
-decide si lo empaqueta o no. Esta placa no está en esa lista ni va a estar.
+decide si lo empaqueta o no. Esta placa no está en esa lista ni va a estar creo.
 
 Y en HP, coreboot solo soporta la línea business (EliteBook, ProBook), porque cada placa hay
-que portearla a mano. Los Pavilion de consumo no están. El único Pavilion en todo el árbol de
+que portearla a mano. Los Pavilion no están. El único Pavilion en todo el árbol de
 coreboot es un m6-1035dx, que encima es AMD.
 
 O sea que había que escribir el port desde cero, y encima encontrar la forma de flashearlo.
@@ -66,15 +66,15 @@ make menuconfig     # Mainboard -> HP -> Pavilion dm4-3000 series
 make
 ```
 
-Usá **SeaBIOS** como payload. Si tenés dual boot con Windows en MBR es lo único que te va a
-andar, y de paso arranca GRUB sin quilombo. Prendé también `CONSOLE_CBMEM` y `USBDEBUG`,
+Use **SeaBIOS** como payload. Si tenés dual boot con Windows en MBR es lo único que te va a
+andar, y de paso arranca GRUB sin quilombo. hay que Prender también `CONSOLE_CBMEM` y `USBDEBUG`,
 porque si algo explota son la única forma de enterarte de dónde.
 
 ---
 
 # El exploit
 
-Te lo cuento entero acá. El writeup es para el detalle fino.
+El writeup es para el detalle fino.
 
 ## El problema
 
@@ -93,7 +93,7 @@ PR0       (+0x74)    = 0x83ff03a1  -> protege 0x3a1000-0x3fffff
 Podés escribir el 85% de la región BIOS, pero no la parte que sirve. Sin saltar eso, o
 comprás un programador SPI y abrís la máquina, o no hay coreboot.
 
-Y mirá esto: el flasher de HP trae `[ForceFlash] BB_PEI=0` en su propio `platform.ini`. O sea
+Y ademas esta esto: el flasher de HP trae `[ForceFlash] BB_PEI=0` en su propio `platform.ini`. O sea
 que **su actualizador tampoco toca el boot block**. No es que no quiera, no puede.
 
 ## Lo que NO funcionó
@@ -177,7 +177,7 @@ Entonces qué hago: **le cierro el candado yo primero, con los registros todaví
 ```
 
 64 bytes, colgados del puntero de la última entrada `DISPATCH`. Un `rtcwake -m mem -s 20` y
-listo. Cuando el firmware quiere escribir `PR0`, su escritura se va a la mierda en silencio.
+listo. Cuando el firmware quiere escribir `PR0`, su escritura se va a la mierda.
 
 ```
 antes del suspend:  HSFS = 0xe008   PR0 = 0x83ff03a1
@@ -234,7 +234,7 @@ Y ahora la buena: **una vez que coreboot arranca, el exploit no lo necesitás nu
 coreboot usa `BOOTMEDIA_LOCK_NONE` y no programa los registros PR, o sea que el flash queda
 abierto para siempre. Reflashear pasa a ser un comando y chau.
 
-### Hacete un backup antes, no seas ansioso
+### Hacete un backup antes, no seas cabeza
 
 ```bash
 sudo flashrom -p internal:laptop=force_I_want_a_brick \
